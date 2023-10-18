@@ -7,20 +7,26 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _react = _interopRequireDefault(require("react"));
 var Dropdown = function Dropdown(_ref) {
-  var name = _ref.name,
-    department = _ref.department,
+  var type = _ref.type,
+    name = _ref.name,
+    value = _ref.value,
     options = _ref.options,
-    onChange = _ref.onChange;
-  return /*#__PURE__*/_react["default"].createElement("select", {
-    className: "select",
+    onChange = _ref.onChange,
+    label = _ref.label;
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "select"
+  }, label && /*#__PURE__*/_react["default"].createElement("label", {
+    htmlFor: name
+  }, label), /*#__PURE__*/_react["default"].createElement("select", {
+    type: type,
     name: name,
-    value: department,
+    value: value,
     onChange: onChange
   }, options.map(function (option, index) {
     return /*#__PURE__*/_react["default"].createElement("option", {
       key: index,
       value: option.value
     }, option.label);
-  }));
+  })));
 };
 var _default = exports["default"] = Dropdown;
