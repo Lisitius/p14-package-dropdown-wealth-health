@@ -14,7 +14,7 @@ const Dropdown = ({
       {label && <label htmlFor={name}>{label}</label>}
       <select type={type} name={name} value={value} onChange={onChange}>
         {defaultOption && (
-          <option value="" disabled selected hidden>
+          <option value="" disabled hidden>
             {defaultOption}
           </option>
         )}

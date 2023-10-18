@@ -26,7 +26,6 @@ var Dropdown = function Dropdown(_ref) {
   }, defaultOption && /*#__PURE__*/_react["default"].createElement("option", {
     value: "",
     disabled: true,
-    selected: true,
     hidden: true
   }, defaultOption), options.map(function (option, index) {
     return /*#__PURE__*/_react["default"].createElement("option", {
