@@ -1,7 +1,7 @@
 {
   "name": "p14-package-dropdown-wealth-health",
   "author": "Lisitius",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Module dropdown pour le projet 14 d'OpenClassrooms",
   "main": "dist/index.js",
   "files": [
