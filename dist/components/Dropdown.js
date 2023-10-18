@@ -12,7 +12,8 @@ var Dropdown = function Dropdown(_ref) {
     value = _ref.value,
     options = _ref.options,
     onChange = _ref.onChange,
-    label = _ref.label;
+    label = _ref.label,
+    defaultOption = _ref.defaultOption;
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "select"
   }, label && /*#__PURE__*/_react["default"].createElement("label", {
@@ -22,7 +23,12 @@ var Dropdown = function Dropdown(_ref) {
     name: name,
     value: value,
     onChange: onChange
-  }, options.map(function (option, index) {
+  }, defaultOption && /*#__PURE__*/_react["default"].createElement("option", {
+    value: "",
+    disabled: true,
+    selected: true,
+    hidden: true
+  }, defaultOption), options.map(function (option, index) {
     return /*#__PURE__*/_react["default"].createElement("option", {
       key: index,
       value: option.value
