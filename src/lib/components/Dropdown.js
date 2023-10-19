@@ -1,4 +1,5 @@
 import React from "react";
+import "./Dropdown.css";
 
 const Dropdown = ({
   type,
@@ -6,13 +7,18 @@ const Dropdown = ({
   value,
   options,
   onChange,
-  label,
   defaultOption,
+  formErrors,
 }) => {
   return (
-    <div className="select">
-      {label && <label htmlFor={name}>{label}</label>}
-      <select type={type} name={name} value={value} onChange={onChange}>
+    <div>
+      <select
+        className={`select ${formErrors[name] ? "select-error" : ""}`}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+      >
         {defaultOption && (
           <option value="" disabled hidden>
             {defaultOption}
@@ -20,10 +26,11 @@ const Dropdown = ({
         )}
         {options.map((option, index) => (
           <option key={index} value={option.value}>
-            {option.label}
+            {option.value}
           </option>
         ))}
       </select>
+      {formErrors[name] && <p className="error-text">{formErrors[name]}</p>}
     </div>
   );
 };
