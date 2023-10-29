@@ -9,6 +9,8 @@ exports["default"] = void 0;
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
 var _react = _interopRequireWildcard(require("react"));
 require("./Dropdown.css");
+// src/lib/components/Dropdown.js
+
 var Dropdown = function Dropdown(_ref) {
   var name = _ref.name,
     value = _ref.value,
@@ -29,8 +31,7 @@ var Dropdown = function Dropdown(_ref) {
     filteredOptions = _useState6[0],
     setFilteredOptions = _useState6[1];
   var wrapperRef = (0, _react.useRef)(null);
-
-  // Mise à jour des options filtrées lorsqu'une recherche est effectuée
+  var inputRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     if (search.length === 0) {
       setFilteredOptions(options);
@@ -42,8 +43,6 @@ var Dropdown = function Dropdown(_ref) {
       setFilteredOptions(filtered);
     }
   }, [search, options]);
-
-  // Gère le clic en dehors du composant pour fermer le menu déroulant
   (0, _react.useEffect)(function () {
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -56,80 +55,52 @@ var Dropdown = function Dropdown(_ref) {
     };
   }, [wrapperRef]);
   var handleToggle = function handleToggle() {
-    return setIsOpen(!isOpen);
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      setTimeout(function () {
+        return inputRef.current.focus();
+      }, 0);
+    }
   };
   var handleSearchChange = function handleSearchChange(e) {
     setSearch(e.target.value);
+    setIsOpen(true);
   };
-  var handleOptionClick = function handleOptionClick(value) {
+  var handleOptionClick = function handleOptionClick(option) {
     onChange({
       target: {
         name: name,
-        value: value
+        value: option.value
       }
     });
     setIsOpen(false);
-    setSearch("");
+    setSearch(option.label || option.value);
   };
   return /*#__PURE__*/_react["default"].createElement("div", {
     ref: wrapperRef,
     className: "dropdown ".concat(formErrors[name] ? "dropdown-error" : "")
-  }, /*#__PURE__*/_react["default"].createElement("button", {
+  }, isOpen ? /*#__PURE__*/_react["default"].createElement("input", {
+    ref: inputRef,
+    type: "text",
+    value: search,
+    onChange: handleSearchChange,
+    className: "dropdown-button",
+    placeholder: defaultOption
+  }) : /*#__PURE__*/_react["default"].createElement("button", {
     className: "dropdown-button",
     onClick: handleToggle
   }, value || defaultOption), isOpen && /*#__PURE__*/_react["default"].createElement("div", {
     className: "dropdown-list"
-  }, /*#__PURE__*/_react["default"].createElement("input", {
-    type: "text",
-    value: search,
-    onChange: handleSearchChange,
-    className: "search-input",
-    placeholder: "Recherche..."
-  }), filteredOptions.map(function (option, index) {
+  }, filteredOptions.map(function (option, index) {
     return /*#__PURE__*/_react["default"].createElement("div", {
       key: index,
       className: "dropdown-list-item",
       onClick: function onClick() {
-        return handleOptionClick(option.value);
+        return handleOptionClick(option);
       }
     }, option.label || option.value);
   })), formErrors[name] && /*#__PURE__*/_react["default"].createElement("p", {
     className: "error-text"
   }, formErrors[name]));
 };
-var _default = exports["default"] = Dropdown; // import React from "react";
-// import "./Dropdown.css";
-// const Dropdown = ({
-//   type,
-//   name,
-//   value,
-//   options,
-//   onChange,
-//   defaultOption,
-//   formErrors,
-// }) => {
-//   return (
-//     <div>
-//       <select
-//         className={`select ${formErrors[name] ? "select-error" : ""}`}
-//         type={type}
-//         name={name}
-//         value={value}
-//         onChange={onChange}
-//       >
-//         {defaultOption && (
-//           <option value="" disabled hidden>
-//             {defaultOption}
-//           </option>
-//         )}
-//         {options.map((option, index) => (
-//           <option key={index} value={option.value}>
-//             {option.value}
-//           </option>
-//         ))}
-//       </select>
-//       {formErrors[name] && <p className="error-text">{formErrors[name]}</p>}
-//     </div>
-//   );
-// };
-// export default Dropdown;
+var _default = exports["default"] = Dropdown;

@@ -1,3 +1,4 @@
+// src/lib/components/Dropdown.js
 import React, { useState, useEffect, useRef } from "react";
 import "./Dropdown.css";
 
@@ -13,6 +14,7 @@ const Dropdown = ({
   const [search, setSearch] = useState("");
   const [filteredOptions, setFilteredOptions] = useState(options);
   const wrapperRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (search.length === 0) {
@@ -38,16 +40,22 @@ const Dropdown = ({
     };
   }, [wrapperRef]);
 
-  const handleToggle = () => setIsOpen(!isOpen);
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      setTimeout(() => inputRef.current.focus(), 0);
+    }
+  };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
+    setIsOpen(true);
   };
 
-  const handleOptionClick = (value) => {
-    onChange({ target: { name, value } });
+  const handleOptionClick = (option) => {
+    onChange({ target: { name, value: option.value } });
     setIsOpen(false);
-    setSearch("");
+    setSearch(option.label || option.value);
   };
 
   return (
@@ -55,23 +63,27 @@ const Dropdown = ({
       ref={wrapperRef}
       className={`dropdown ${formErrors[name] ? "dropdown-error" : ""}`}
     >
-      <button className="dropdown-button" onClick={handleToggle}>
-        {value || defaultOption}
-      </button>
+      {isOpen ? (
+        <input
+          ref={inputRef}
+          type="text"
+          value={search}
+          onChange={handleSearchChange}
+          className="dropdown-button"
+          placeholder={defaultOption}
+        />
+      ) : (
+        <button className="dropdown-button" onClick={handleToggle}>
+          {value || defaultOption}
+        </button>
+      )}
       {isOpen && (
         <div className="dropdown-list">
-          <input
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            className="search-input"
-            placeholder="Recherche..."
-          />
           {filteredOptions.map((option, index) => (
             <div
               key={index}
               className="dropdown-list-item"
-              onClick={() => handleOptionClick(option.value)}
+              onClick={() => handleOptionClick(option)}
             >
               {option.label || option.value}
             </div>
