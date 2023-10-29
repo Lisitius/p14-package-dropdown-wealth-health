@@ -9,8 +9,6 @@ exports["default"] = void 0;
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/slicedToArray"));
 var _react = _interopRequireWildcard(require("react"));
 require("./Dropdown.css");
-// src/lib/components/Dropdown.js
-
 var Dropdown = function Dropdown(_ref) {
   var name = _ref.name,
     value = _ref.value,

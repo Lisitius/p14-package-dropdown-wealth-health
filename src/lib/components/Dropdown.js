@@ -1,4 +1,3 @@
-// src/lib/components/Dropdown.js
 import React, { useState, useEffect, useRef } from "react";
 import "./Dropdown.css";
 
