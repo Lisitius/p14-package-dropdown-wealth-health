@@ -28,12 +28,12 @@ Then, you can use the Dropdown component in your React component or application.
 
 ## Props
 
-- **name** (string): The name of the dropdown, used for form submission and error handling. Required.
-- **value** (string): The current value selected in the dropdown. Required.
-- **options** (array of objects): An array of option objects, each with a label (string) and a value (string). Required.
-- **onChange** (function): A function to handle changes in the dropdown's value. The function receives an event object with the selected option's value. Required.
-- **defaultOption** (string): A default option to be displayed when no value is selected. Optional.
-- **formErrors** (object): An object containing any form validation errors, where the key is the name of the dropdown and the value is the error message. Optional.
+- **name** (string): The name of the dropdown, used for form submission and error handling. *Required*
+- **value** (string): The current value selected in the dropdown. *Required*
+- **options** (array of objects): An array of option objects, each with a label (string) and a value (string). *Required*
+- **onChange** (function): A function to handle changes in the dropdown's value. The function receives an event object with the selected option's value. *Required*
+- **defaultOption** (string): A default option to be displayed when no value is selected. *Optional*
+- **formErrors** (object): An object containing any form validation errors, where the key is the name of the dropdown and the value is the error message. *Optional*
 
 ## Example
 
