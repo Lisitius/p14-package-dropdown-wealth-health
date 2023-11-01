@@ -4,7 +4,7 @@ Dropdown module for OpenClassrooms project 14 of Javascript React formation.
 
 ## Installation
 
-To install p14-package-dropdown-wealth-health, you can use npm or yarn:
+To install the dropdown, you can use npm or yarn:
 
 ```
 npm install p14-package-dropdown-wealth-health
