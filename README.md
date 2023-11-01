@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# Dropdown p14
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dropdown module for OpenClassrooms project 14 of Javascript React formation.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+To install p14-package-dropdown-wealth-health, you can use npm or yarn:
 
-### `npm start`
+```
+npm install p14-package-dropdown-wealth-health
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+or
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+yarn add p14-package-dropdown-wealth-health
+```
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+First, import the Dropdown component in your React file:
 
-### `npm run build`
+```
+import { Dropdown } from "p14-package-dropdown-wealth-health";
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then, you can use the Dropdown component in your React component or application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Props
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **name** (string): The name of the dropdown, used for form submission and error handling. Required.
+- **value** (string): The current value selected in the dropdown. Required.
+- **options** (array of objects): An array of option objects, each with a label (string) and a value (string). Required.
+- **onChange** (function): A function to handle changes in the dropdown's value. The function receives an event object with the selected option's value. Required.
+- **defaultOption** (string): A default option to be displayed when no value is selected. Optional.
+- **formErrors** (object): An object containing any form validation errors, where the key is the name of the dropdown and the value is the error message. Optional.
 
-### `npm run eject`
+## Example
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Below is an example of how to use the Dropdown component in a React application:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+import React, { useState } from "react";
+import { Dropdown } from "p14-package-dropdown-wealth-health";
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function App() {
+  const [selectedValue, setSelectedValue] = useState("");
+  const [errors, setErrors] = useState({});
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  const options = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" },
+  ];
 
-## Learn More
+  const validate = (value) => {
+    let isValid = true;
+    let errors = {};
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    if (value === "") {
+      errors.dropdownExample = "This field is required";
+      isValid = false;
+    }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    setErrors(errors);
+    return isValid;
+  };
 
-### Code Splitting
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    setSelectedValue(newValue);
+    validate(newValue);
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  const handleSubmit = () => {
+    if (validate(selectedValue)) {
+      alert("Form submitted successfully!");
+    }
+  };
 
-### Analyzing the Bundle Size
+  return (
+    <div>
+      <h1>Dropdown Example</h1>
+      <Dropdown
+        name="dropdownExample"
+        value={selectedValue}
+        options={options}
+        onChange={handleChange}
+        defaultOption="Select an option"
+        formErrors={errors}
+      />
+      {errors.dropdownExample && (
+        <p className="error">{errors.dropdownExample}</p>
+      )}
+      <button onClick={handleSubmit}>Submit</button>
+      <p>Selected Value: {selectedValue}</p>
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+export default App;
+```
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
