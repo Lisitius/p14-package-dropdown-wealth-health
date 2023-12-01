@@ -2,6 +2,12 @@
 
 Dropdown module for OpenClassrooms project 14 of Javascript React formation.
 
+## Prerequisites
+
+Node version 18.16.1  
+Npm version 9.8.0  
+Editor : VS code
+
 ## Installation
 
 To install the dropdown, you can use npm or yarn:
